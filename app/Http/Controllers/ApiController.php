@@ -31,7 +31,8 @@ class ApiController extends Controller
 
     public function getBook($id){
         if (Book::where('id', $id)->exists()) {
-            $Book = Product::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            // $book = Product::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            $book = Book::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($book, 200);
           } else {
             return response()->json([
