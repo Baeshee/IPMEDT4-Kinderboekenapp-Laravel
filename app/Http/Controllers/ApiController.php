@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Users_Book;
 
 class ApiController extends Controller
 {
@@ -40,4 +41,21 @@ class ApiController extends Controller
             ], 404);
           }
     }
+
+    public function getUsersBooks($id){
+      if (User::where('id', $id)->exists()) {
+          $books = User::where('id', $id)->first()->getUserAddedBooks;
+
+          $books_data = array();
+          foreach ($books as $book){
+            $books_data[] = $book->getBook;
+          }
+          
+          return response($books_data, 200);
+        } else {
+          return response()->json([
+            "message" => "User's books not found"
+          ], 404);
+        }
+  }
 }
