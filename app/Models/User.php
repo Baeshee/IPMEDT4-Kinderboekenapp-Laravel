@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Users_Book;
 
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -72,4 +73,8 @@ class User extends Authenticatable implements JWTSubject
     function token() {
         return $this->hasMany( 'App\Models\Token', 'user_id' );
       }
+
+    public function getUserAddedBooks(){
+        return $this->hasMany(Users_Book::class, 'user_email', 'email');
+    }
 }
