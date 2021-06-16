@@ -17,8 +17,7 @@ class CreateAssignmentsTable extends Migration
             $table->id();
             $table->bigInteger('book_isbn');
             $table->foreign('book_isbn')->references('ISBN')->on('books');
-            $table->string("assignment_1")->unique();
-            $table->string("assignment_2")->unique();
+            $table->string("assignment")->unique();
         });
     }
 

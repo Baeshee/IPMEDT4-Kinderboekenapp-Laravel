@@ -20,17 +20,11 @@ class CreateUserAssignments extends Migration
             $table->bigInteger('book_isbn');
             $table->foreign('book_isbn')->references('book_isbn')->on('users_books');
 
-            $table->string('assignment_1');
-            $table->foreign('assignment_1')->references('assignment_1')->on('assignments');
-            $table->string('status_as_1');
-            $table->string('answer_as_1')->nullable();
-            $table->string('answer_as_1_opt')->nullable();
-
-            $table->string('assignment_2');
-            $table->foreign('assignment_2')->references('assignment_2')->on('assignments');
-            $table->string('status_as_2');
-            $table->string('answer_as_2')->nullable();
-            $table->string('answer_as_2_opt')->nullable();
+            $table->string('assignment');
+            $table->foreign('assignment')->references('assignment')->on('assignments');
+            $table->string('status');
+            $table->string('answer_1')->nullable();
+            $table->string('answer_2')->nullable();
         });
     }
 
@@ -44,8 +38,7 @@ class CreateUserAssignments extends Migration
         Schema::table('user_assignments', function (Blueprint $table) {
             $table->dropForeign('user_assignments_user_email_foreign');
             $table->dropForeign('user_assignments_book_isbn_foreign');
-            $table->dropForeign('user_assignments_assignment_1_foreign');
-            $table->dropForeign('user_assignments_assignment_2_foreign');
+            $table->dropForeign('user_assignments_assignment_foreign');
         });
         Schema::dropIfExists('user_assignments');
     }
