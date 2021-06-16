@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Book;
-use App\Models\UserAssignment;
+use App\Models\User;
 
 class Assignment extends Model
 {
@@ -16,6 +16,6 @@ class Assignment extends Model
     }
 
     public function getUserAssignments(){
-        return $this->hasMany(UserAssignment::class, 'assignment', 'assignment');
+        return $this->hasMany(User::class, 'user_email', 'email');
     }
 }

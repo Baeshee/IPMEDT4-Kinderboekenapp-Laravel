@@ -15,11 +15,18 @@ class CreateAssignmentsTable extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
+            $table->string('user_email');
+            $table->foreign('user_email')->references('user_email')->on('users_books');
             $table->bigInteger('book_isbn');
-            $table->foreign('book_isbn')->references('ISBN')->on('books');
+            $table->foreign('book_isbn')->references('book_isbn')->on('users_books');
+
             $table->integer('assignment_position');
-            $table->string("assignment")->unique();
+            $table->string('assignment');
+            $table->foreign('assignment')->references('assignment')->on('assignments');
             $table->string('kind_of_assignment');
+            $table->string('status');
+            $table->string('answer_1')->nullable();
+            $table->string('answer_2')->nullable();
         });
     }
 
@@ -31,8 +38,10 @@ class CreateAssignmentsTable extends Migration
     public function down()
     {
         Schema::table('assignments', function (Blueprint $table) {
+            $table->dropForeign('assignments_user_email_foreign');
             $table->dropForeign('assignments_book_isbn_foreign');
+            $table->dropForeign('assignments_assignment_foreign');
         });
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('user_assignments');
     }
 }

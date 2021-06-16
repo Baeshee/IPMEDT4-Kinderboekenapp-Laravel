@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Users_Book;
-use App\Models\UserAssignments;
+use App\Models\Assignments;
 
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -80,6 +80,6 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function getAssignments(){
-        return $this->hasMany(UserAssignments::class, 'user_email', 'email');
+        return $this->hasMany(Assignments::class, 'user_email', 'email');
     }
 }
