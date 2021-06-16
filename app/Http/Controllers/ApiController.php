@@ -19,7 +19,9 @@ class ApiController extends Controller
         return response($books, 200);
     }
 
-    public function getUser($id){
+    public function getUser($id){ #case of login needed, remove $id from the function
+      # uncomment this when login is active # $id = auth()->user()->id;
+
         if (User::where('id', $id)->exists()) {
             $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($user, 200);
@@ -29,6 +31,7 @@ class ApiController extends Controller
             ], 404);
           }
     }
+
 
     public function getBook($id){
         if (Book::where('id', $id)->exists()) {
