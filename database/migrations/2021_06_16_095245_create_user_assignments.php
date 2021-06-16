@@ -20,8 +20,10 @@ class CreateUserAssignments extends Migration
             $table->bigInteger('book_isbn');
             $table->foreign('book_isbn')->references('book_isbn')->on('users_books');
 
+            $table->integer('assignment_position');
             $table->string('assignment');
             $table->foreign('assignment')->references('assignment')->on('assignments');
+            $table->string('kind_of_assignment');
             $table->string('status');
             $table->string('answer_1')->nullable();
             $table->string('answer_2')->nullable();
