@@ -10,6 +10,7 @@ use Exception;
 
 use App\Models\Token;
 use App\Models\User;
+use DB;
 
 use JWTAuth;
 
@@ -22,9 +23,9 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-         $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
-         $this->middleware('jwt.xauth', ['except' => ['login', 'register', 'refresh']]);
-	     $this->middleware('jwt.xrefresh', ['only' => ['refresh']]);    
+        $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
+        $this->middleware('jwt.xauth', ['except' => ['login', 'register', 'refresh']]);
+	      $this->middleware('jwt.xrefresh', ['only' => ['refresh']]);    
     }
 
 

@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             UsersBooksSeeder::class,
             AssignmentsTableSeeder::class,
-            UserAssignmentsTableSeeder::class,
         ]);
     }
 }
