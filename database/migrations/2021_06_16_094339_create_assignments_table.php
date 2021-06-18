@@ -19,11 +19,15 @@ class CreateAssignmentsTable extends Migration
             $table->foreign('user_email')->references('user_email')->on('users_books');
             $table->bigInteger('book_isbn');
             $table->foreign('book_isbn')->references('book_isbn')->on('users_books');
-            $table->string('assignment');
+            $table->text('assignment');
+            $table->string('assignmentChild1')->nullable();
+            $table->string('assignmentChild2')->nullable();
+            $table->string('assignmentChild3')->nullable();
             $table->string('kind_of_assignment');
             $table->string('status');
             $table->string('answer_1')->nullable();
             $table->string('answer_2')->nullable();
+            $table->string('answer_3')->nullable();
         });
     }
 
