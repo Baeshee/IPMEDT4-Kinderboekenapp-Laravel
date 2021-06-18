@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\AssignmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/users/{id}', [UsersController::class, 'show']);
 
 Route::get('/books', [BooksController::class, 'index']);
 Route::get('/books/{id}', [BooksController::class, 'show']);
+
+Route::get('/assignments', [assignmentsController::class, 'index']);
+Route::get('/assignments/{id}', [assignmentsController::class, 'show']);

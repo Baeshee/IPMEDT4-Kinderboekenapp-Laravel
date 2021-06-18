@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
+use App\Model\Assignment;
 
 class ApiController extends Controller
 {
@@ -18,6 +19,12 @@ class ApiController extends Controller
         $books = Book::all()->toJson(JSON_PRETTY_PRINT);
         return response($books, 200);
     }
+    public function getAllAssignments(){
+      $assignments = Assignment::all()->toJson(JSON_PRETTY_PRINT);
+      return response($assignments, 200);
+  }
+
+
 
     public function getUser($id){ #case of login needed, remove $id from the function
       # uncomment this when login is active # $id = auth()->user()->id;
