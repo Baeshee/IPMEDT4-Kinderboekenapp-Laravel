@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
-use App\Model\Assignment;
+use App\Models\Assignment;
 
 class ApiController extends Controller
 {
@@ -19,12 +19,24 @@ class ApiController extends Controller
         $books = Book::all()->toJson(JSON_PRETTY_PRINT);
         return response($books, 200);
     }
+
     public function getAllAssignments(){
       $assignments = Assignment::all()->toJson(JSON_PRETTY_PRINT);
       return response($assignments, 200);
   }
 
+  public function getAssignment($id){ #case of login needed, remove $id from the function
+    # uncomment this when login is active # $id = auth()->user()->id;
 
+      if (User::where('id', $id)->exists()) {
+          $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+          return response($user, 200);
+        } else {
+          return response()->json([
+            "message" => "User not found"
+          ], 404);
+        }
+  }
 
     public function getUser($id){ #case of login needed, remove $id from the function
       # uncomment this when login is active # $id = auth()->user()->id;
