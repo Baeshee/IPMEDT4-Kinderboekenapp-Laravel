@@ -20,7 +20,7 @@ use App\Http\Controllers\AuthController;
 Route::get('users', [ApiController::class, 'getAllUsers']);
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('users/{id}', [ApiController::class, 'getUser']);
-Route::get('books/{id}', [ApiController::class, 'getBook']);
+Route::get('books/{book_title}', [ApiController::class, 'getBook']);
 Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
 
 
