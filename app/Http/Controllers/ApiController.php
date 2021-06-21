@@ -46,13 +46,16 @@ class ApiController extends Controller
     }
 
     public function getMascotteImg($id) {
-      $mascotte_img = User::where('mascotte_img', $mascotte_img)->get()->toJson(JSON_PRETTY_PRINT);
-      return response($mascotte_img, 200);
-    } else {
+      if(User::where('id', $id)->exists()) {
+        $mascotte_img = User::where('id', $id)->get('mascotte_img')->toJson(JSON_PRETTY_PRINT);
+        return response($mascotte_img, 200);
+      }
+      else {
       return response()->json([
         "message" => "Image not found"
       ], 404);
     }
+  }
 
     public function getUsersBooks($id){
       if (User::where('id', $id)->exists()) {
