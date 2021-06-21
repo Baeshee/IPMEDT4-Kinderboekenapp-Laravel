@@ -23,6 +23,7 @@ Route::get('users/{id}', [ApiController::class, 'getUser']);
 Route::get('books/{book_title}', [ApiController::class, 'getBook']);
 Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
 Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
+Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
 
 
 // Auth routes

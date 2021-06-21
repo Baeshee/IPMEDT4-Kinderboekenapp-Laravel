@@ -14,7 +14,7 @@ class AddMascotteImgToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("mascotte_img")->default('\img\blue.png');
+            $table->string("mascotte_img")->default('/img/blue.png');
         });
     }
 

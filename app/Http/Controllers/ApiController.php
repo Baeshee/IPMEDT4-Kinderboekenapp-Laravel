@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
+use DB;
 
 class ApiController extends Controller
 {
@@ -54,6 +55,19 @@ class ApiController extends Controller
       return response()->json([
         "message" => "Image not found"
       ], 404);
+    }
+  }
+
+  public function updateMascotteImg($id){
+    if(User::where('id', $id)->exists()) {
+      DB::table('users')->update([
+        'mascotte_img' => request('img'),
+      ]);
+    }
+    else {
+    return response()->json([
+      "message" => "User not found"
+    ], 404);
     }
   }
 

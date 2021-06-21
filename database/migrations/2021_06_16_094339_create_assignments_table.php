@@ -16,9 +16,9 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->string('user_email');
-            $table->foreign('user_email')->references('user_email')->on('users_books');
+            $table->foreign('user_email')->references('email')->on('users');
             $table->bigInteger('book_isbn');
-            $table->foreign('book_isbn')->references('book_isbn')->on('users_books');
+            $table->foreign('book_isbn')->references('ISBN')->on('books');
             $table->text('assignment');
             $table->string('assignmentChild1')->nullable();
             $table->string('assignmentChild2')->nullable();
