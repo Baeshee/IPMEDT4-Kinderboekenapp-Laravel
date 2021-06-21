@@ -60,7 +60,7 @@ class ApiController extends Controller
 
   public function updateMascotteImg($id){
     if(User::where('id', $id)->exists()) {
-      DB::table('users')->update([
+      DB::table('users')->where('id', $id)->update([
         'mascotte_img' => request('img'),
       ]);
     }
