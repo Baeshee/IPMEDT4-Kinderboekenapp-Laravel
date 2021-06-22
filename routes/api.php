@@ -25,6 +25,8 @@ Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
 Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
 Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
 
+Route::post('booktouser/{id}', [ApiController::class, 'storeBookToUser']);
+
 
 // Auth routes
 Route::group([
@@ -41,7 +43,7 @@ Route::group([
 });
 
 Route::any('{any}', function(){
-    return response()->jsnon([
+    return response()->json([
         'status' => 'error',
         'message' => "Recourse not found"], 404);
 })->where('any', '.*');

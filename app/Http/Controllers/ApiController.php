@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
+use Auth;
 use DB;
+
 
 class ApiController extends Controller
 {
@@ -74,17 +76,38 @@ class ApiController extends Controller
     public function getUsersBooks($id){
       if (User::where('id', $id)->exists()) {
           $books = User::where('id', $id)->first()->getUserAddedBooks;
-
           $books_data = array();
           foreach ($books as $book){
             $books_data[] = $book->getBook;
-          }
-          
+          }          
           return response($books_data, 200);
         } else {
           return response()->json([
             "message" => "User's books not found"
           ], 404);
         }
+  }
+
+  public function storeBookToUser($bookId, Users_Book $usersBooks){
+    $user = Auth::user();
+    if(Book::where('id', $bookId)->exists()){
+      $book = Book::where('id', $bookId)->first();
+      $usersBooks->user_email = $user->email;
+      $usersBooks->book_isbn = $book->ISBN;
+      try{
+        $usersBooks->save();
+        return response()->json([
+          "message" => "Book saved"
+        ], 200);
+      }catch(Exception $e){
+        return response()->json([
+          "message" => "Saving went wrong"
+        ], 408);
+      }
+    }else {
+      return response()->json([
+        "message" => "Book not found"
+      ], 404);
+    }
   }
 }
