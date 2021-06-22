@@ -17,25 +17,12 @@ use App\Http\Controllers\AssignmentsController;
 |
 */
 
-// Api routes
-// Route::get('users', [ApiController::class, 'getAllUsers']);
-// Route::get('books', [ApiController::class, 'getAllBooks']);
-// Route::get('users/{id}', [ApiController::class, 'getUser']);
-// Route::get('books/{book_title}', [ApiController::class, 'getBook']);
-// Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
-// Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
-// Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
-
-// Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
 
 // API routes
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('books/{book_title}', [ApiController::class, 'getBook']);
 Route::get('assignments', [ApiController::class, 'getAllAssignments']);
-Route::get('users/{id}', [ApiController::class, 'getUser']);
-Route::get('books/{id}', [ApiController::class, 'getBook']);
-Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
-Route::patch('assignments/{id}', [ApiController::class, 'updateAnswer']);
+// Route::patch('assignments/{id}', [ApiController::class, 'updateAnswer']);
 
 
 // User routes

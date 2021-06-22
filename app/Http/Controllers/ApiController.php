@@ -39,8 +39,8 @@ class ApiController extends Controller
       return response($assignments, 200);
   }
 
-  public function getAssignment($id){ #case of login needed, remove $id from the function
-    # uncomment this when login is active # $id = auth()->user()->id;
+  public function getAssignment(){ #case of login needed, remove $id from the function
+      $id = auth()->user()->id;
 
       if (User::where('id', $id)->exists()) {
           $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
@@ -52,8 +52,8 @@ class ApiController extends Controller
         }
   }
 
-    public function updateAnswer($id){
-    
+    public function updateAnswer(){
+      $id = auth()->user()->id;
       if(User::where('id', $id)->exists()) {
       DB::table('assignments')->where('id',$id)->update([
           'answer_1' => request('answer_1'),
