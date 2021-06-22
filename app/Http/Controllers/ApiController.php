@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
 use Auth;
+use DB;
+
 
 class ApiController extends Controller
 {
@@ -20,7 +22,9 @@ class ApiController extends Controller
         return response($books, 200);
     }
 
-    public function getUser($id){
+    public function getUser($id){ #case of login needed, remove $id from the function
+      # uncomment this when login is active # $id = auth()->user()->id;
+
         if (User::where('id', $id)->exists()) {
             $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
             return response($user, 200);
@@ -31,27 +35,51 @@ class ApiController extends Controller
           }
     }
 
-    public function getBook($id){
-        if (Book::where('id', $id)->exists()) {
+
+    public function getBook($book_title){
+        if (Book::where('book_title', $book_title)->exists()) {
             // $book = Product::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
-            $book = Book::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            $book = Book::where('book_title', $book_title)->get()->toJson(JSON_PRETTY_PRINT);
             return response($book, 200);
           } else {
             return response()->json([
-              "message" => "Product not found"
+              "message" => "Book not found"
             ], 404);
           }
     }
 
+    public function getMascotteImg($id) {
+      if(User::where('id', $id)->exists()) {
+        $mascotte_img = User::where('id', $id)->get('mascotte_img')->toJson(JSON_PRETTY_PRINT);
+        return response($mascotte_img, 200);
+      }
+      else {
+      return response()->json([
+        "message" => "Image not found"
+      ], 404);
+    }
+  }
+
+  public function updateMascotteImg($id){
+    if(User::where('id', $id)->exists()) {
+      DB::table('users')->where('id', $id)->update([
+        'mascotte_img' => request('img'),
+      ]);
+    }
+    else {
+    return response()->json([
+      "message" => "User not found"
+    ], 404);
+    }
+  }
+
     public function getUsersBooks($id){
       if (User::where('id', $id)->exists()) {
           $books = User::where('id', $id)->first()->getUserAddedBooks;
-
           $books_data = array();
           foreach ($books as $book){
             $books_data[] = $book->getBook;
-          }
-          
+          }          
           return response($books_data, 200);
         } else {
           return response()->json([
@@ -62,14 +90,10 @@ class ApiController extends Controller
 
   public function storeBookToUser($bookId, Users_Book $usersBooks){
     $user = Auth::user();
-    // dd($user->email);
     if(Book::where('id', $bookId)->exists()){
       $book = Book::where('id', $bookId)->first();
       $usersBooks->user_email = $user->email;
-      // dd($usersBooks);
-      // dd($book);
       $usersBooks->book_isbn = $book->ISBN;
-      // dd($usersBooks);
       try{
         $usersBooks->save();
         return response()->json([
@@ -86,20 +110,4 @@ class ApiController extends Controller
       ], 404);
     }
   }
-
-  // public function storeBookToUser(Request $request, Users_Book $usersBooks, $bookId) {
-  //   dd($request);
-  //   $usersBooks->user_email = $email = $request->user()['email'];
-  //   $usersBooks->book_isbn = $ISBN = $request->book()['ISBN'];
-  //   try{
-  //       $usersBooks->save();
-  //       return response()->json([
-  //         "message" => "Book saved"
-  //       ], 200);
-  //     }catch(Exception $e){
-  //       return response()->json([
-  //         "message" => "Saving went wrong"
-  //       ], 408);
-  //     }
-  // }
 }

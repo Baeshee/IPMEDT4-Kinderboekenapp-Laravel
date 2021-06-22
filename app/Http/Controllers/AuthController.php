@@ -10,6 +10,7 @@ use Exception;
 
 use App\Models\Token;
 use App\Models\User;
+use DB;
 
 use JWTAuth;
 

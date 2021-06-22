@@ -20,8 +20,10 @@ use App\Http\Controllers\AuthController;
 Route::get('users', [ApiController::class, 'getAllUsers']);
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('users/{id}', [ApiController::class, 'getUser']);
-Route::get('books/{id}', [ApiController::class, 'getBook']);
+Route::get('books/{book_title}', [ApiController::class, 'getBook']);
 Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
+Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
+Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
 
 Route::post('booktouser/{id}', [ApiController::class, 'storeBookToUser']);
 
@@ -35,7 +37,7 @@ Route::group([
         Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
         Route::post('logoutall', [App\Http\Controllers\AuthController::class, 'logoutall']);
         Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
-        Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
+        Route::get('me', [App\Http\Controllers\AuthController::class, 'me']);
         // Register
         Route::post('register', [App\Http\Controllers\AuthController::class, 'register']);
 });
