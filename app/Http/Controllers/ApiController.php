@@ -12,6 +12,12 @@ use DB;
 
 class ApiController extends Controller
 {
+  // public function __construct()
+  // {
+  //     $this->middleware('jwt.verify');
+  //     $this->middleware('jwt.xauth');  
+  // }
+
     public function getAllUsers(){
         $users = User::all()->toJson(JSON_PRETTY_PRINT);
         return response($users, 200);
@@ -22,8 +28,8 @@ class ApiController extends Controller
         return response($books, 200);
     }
 
-    public function getUser($id){ #case of login needed, remove $id from the function
-      # uncomment this when login is active # $id = auth()->user()->id;
+    public function getUser(){ #case of login needed, remove $id from the function
+      $id = auth()->user()->id;
 
         if (User::where('id', $id)->exists()) {
             $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
@@ -48,7 +54,8 @@ class ApiController extends Controller
           }
     }
 
-    public function getMascotteImg($id) {
+    public function getMascotteImg() {
+      $id = auth()->user()->id;
       if(User::where('id', $id)->exists()) {
         $mascotte_img = User::where('id', $id)->get('mascotte_img')->toJson(JSON_PRETTY_PRINT);
         return response($mascotte_img, 200);
@@ -60,7 +67,8 @@ class ApiController extends Controller
     }
   }
 
-  public function updateMascotteImg($id){
+  public function updateMascotteImg(){
+    $id = auth()->user()->id;
     if(User::where('id', $id)->exists()) {
       DB::table('users')->where('id', $id)->update([
         'mascotte_img' => request('img'),
@@ -73,7 +81,8 @@ class ApiController extends Controller
     }
   }
 
-    public function getUsersBooks($id){
+    public function getUsersBooks(){
+      $id = auth()->user()->id;
       if (User::where('id', $id)->exists()) {
           $books = User::where('id', $id)->first()->getUserAddedBooks;
           $books_data = array();
@@ -88,11 +97,12 @@ class ApiController extends Controller
         }
   }
 
-  public function storeBookToUser($bookId, Users_Book $usersBooks){
-    $user = Auth::user();
+  public function storeBookToUser(Users_Book $usersBooks){
+    $bookId = request('id');
+    $email = auth()->user()->email;
     if(Book::where('id', $bookId)->exists()){
       $book = Book::where('id', $bookId)->first();
-      $usersBooks->user_email = $user->email;
+      $usersBooks->user_email = $email;
       $usersBooks->book_isbn = $book->ISBN;
       try{
         $usersBooks->save();

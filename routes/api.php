@@ -17,16 +17,28 @@ use App\Http\Controllers\AuthController;
 */
 
 // Api routes
-Route::get('users', [ApiController::class, 'getAllUsers']);
-Route::get('books', [ApiController::class, 'getAllBooks']);
-Route::get('users/{id}', [ApiController::class, 'getUser']);
-Route::get('books/{book_title}', [ApiController::class, 'getBook']);
-Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
-Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
-Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
+// Route::get('users', [ApiController::class, 'getAllUsers']);
+// Route::get('books', [ApiController::class, 'getAllBooks']);
+// Route::get('users/{id}', [ApiController::class, 'getUser']);
+// Route::get('books/{book_title}', [ApiController::class, 'getBook']);
+// Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
+// Route::get('users/{id}/mascotteimg', [ApiController::class, 'getMascotteImg']);
+// Route::patch('update/{id}', [ApiController::class, 'updateMascotteImg']);
 
-Route::post('booktouser/{id}', [ApiController::class, 'storeBookToUser']);
+// Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
 
+// User routes
+Route::group([
+    // 'middleware' => 'api',
+    'prefix' => 'user',
+    ], function ($router){
+        Route::get('books', [ApiController::class, 'getAllBooks']);
+        Route::get('profile', [ApiController::class, 'getUser']);
+        Route::get('profile/books', [ApiController::class, 'getUsersBooks']);
+        Route::get('profile/mascotteimg', [ApiController::class, 'getMascotteImg']);
+        Route::patch('update', [ApiController::class, 'updateMascotteImg']);
+        Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
+});
 
 // Auth routes
 Route::group([
