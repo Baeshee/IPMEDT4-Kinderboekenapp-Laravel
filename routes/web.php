@@ -24,3 +24,5 @@ Route::get('/books/{id}', [BooksController::class, 'show']);
 
 Route::get('/assignments', [assignmentsController::class, 'index']);
 Route::get('/assignments/{id}', [assignmentsController::class, 'show']);
+
+Route::put('/assignments/1/',[assignmentsController::class, 'index']);

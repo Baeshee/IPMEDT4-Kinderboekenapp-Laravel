@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
 use App\Models\Assignment;
+use DB;
 
 class ApiController extends Controller
 {
@@ -36,6 +37,20 @@ class ApiController extends Controller
             "message" => "User not found"
           ], 404);
         }
+  }
+
+  public function updateAnswer($id){
+  
+    if(User::where('id', $id)->exists()) {
+    DB::table('assignments')->where('id',$id)->update([
+        'answer_1' => request('answer_1'),
+    ]);
+    }
+    else {
+    return response()->json([
+      "message" => "User not found"
+    ], 404);
+    }
   }
 
     public function getUser($id){ #case of login needed, remove $id from the function
