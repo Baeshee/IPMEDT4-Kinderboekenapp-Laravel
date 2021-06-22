@@ -27,12 +27,15 @@ use App\Http\Controllers\AuthController;
 
 // Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
 
+// API routes
+Route::get('books', [ApiController::class, 'getAllBooks']);
+Route::get('books/{book_title}', [ApiController::class, 'getBook']);
+
 // User routes
 Route::group([
     // 'middleware' => 'api',
     'prefix' => 'user',
     ], function ($router){
-        Route::get('books', [ApiController::class, 'getAllBooks']);
         Route::get('profile', [ApiController::class, 'getUser']);
         Route::get('profile/books', [ApiController::class, 'getUsersBooks']);
         Route::get('profile/mascotteimg', [ApiController::class, 'getMascotteImg']);

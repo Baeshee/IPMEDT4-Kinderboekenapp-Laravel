@@ -12,12 +12,6 @@ use DB;
 
 class ApiController extends Controller
 {
-  // public function __construct()
-  // {
-  //     $this->middleware('jwt.verify');
-  //     $this->middleware('jwt.xauth');  
-  // }
-
     public function getAllUsers(){
         $users = User::all()->toJson(JSON_PRETTY_PRINT);
         return response($users, 200);
