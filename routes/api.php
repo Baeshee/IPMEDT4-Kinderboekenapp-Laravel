@@ -17,7 +17,6 @@ use App\Http\Controllers\AssignmentsController;
 |
 */
 
-
 // API routes
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('books/{book_title}', [ApiController::class, 'getBook']);
@@ -27,7 +26,7 @@ Route::get('assignments', [ApiController::class, 'getAllAssignments']);
 
 // User routes
 Route::group([
-    // 'middleware' => 'api',
+    'middleware' => 'api',
     'prefix' => 'user',
     ], function ($router){
         Route::get('profile', [ApiController::class, 'getUser']);
@@ -35,6 +34,7 @@ Route::group([
         Route::get('profile/mascotteimg', [ApiController::class, 'getMascotteImg']);
         Route::patch('update', [ApiController::class, 'updateMascotteImg']);
         Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
+        Route::get('assignments', [ApiController::class, 'getAssignments']);
 });
 
 // Auth routes

@@ -12,6 +12,13 @@ use Auth;
 
 class ApiController extends Controller
 {
+  // public function __construct()
+  // {
+  //     $this->middleware('jwt.verify');
+  //     $this->middleware('jwt.xauth');
+  // }
+
+
     public function getAllUsers(){
         $users = User::all()->toJson(JSON_PRETTY_PRINT);
         return response($users, 200);
@@ -39,17 +46,18 @@ class ApiController extends Controller
       return response($assignments, 200);
   }
 
-  public function getAssignment(){ #case of login needed, remove $id from the function
-      $id = auth()->user()->id;
+  public function getAssignments(){
+    $isbn = request('book_isbn');
+    $email = auth()->user()->email;
 
-      if (User::where('id', $id)->exists()) {
-          $user = User::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
-          return response($user, 200);
-        } else {
-          return response()->json([
-            "message" => "User not found"
-          ], 404);
-        }
+    if (Assignment::where('book_isbn', $isbn)->exists()) {
+      $assignments = Assignment::all()->toJson(JSON_PRETTY_PRINT);
+        return response($assignments, 200);
+      } else {
+        return response()->json([
+          "message" => "Assignments not found"
+        ], 404);
+      }
   }
 
     public function updateAnswer(){
