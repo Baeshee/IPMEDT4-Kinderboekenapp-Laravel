@@ -18,7 +18,7 @@ class AssignmentsTableSeeder extends Seeder
         DB::table('assignments')->insert([
             "user_email" => "TimBakker123@gmail.com",
             "book_isbn" => "9789000339280",
-            "assignment" => 'Hieronder kun jij een kleur kiezen. Zoek de mooiste kleur uit en geef hem net zo’n bijzondere naam. Bedenk daarvoor dus goed waar de kleur jou precies aan doet denken.',
+            "assignment" => 'Bibi haar vader heeft een wolwinkel en verkoopt daar de meest bijzondere kleuren wol. Zo lezen we over paardenbloemstengelgroen, varkensstaartjesroze, diepzeezwart, watermeloenrood, krijtrotswit en Middellandsezeeblauw. In de naam van de kleur zie je steeds al staan waar je de kleur ‘in het echt’ terug kunt zien. Kun jij ook zo’n mooie naam bedenken voor een kleur? Hieronder kun jij een kleur kiezen. Zoek de mooiste kleur uit en geef hem net zo’n bijzondere naam. Bedenk daarvoor dus goed waar de kleur jou precies aan doet denken..',
             "assignmentChild1" => ' ',
             "assignmentChild2" => ' ',
             "assignmentChild3" => ' ',
