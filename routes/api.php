@@ -23,6 +23,8 @@ Route::get('users/{id}', [ApiController::class, 'getUser']);
 Route::get('books/{id}', [ApiController::class, 'getBook']);
 Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
 
+Route::post('booktouser/{id}', [ApiController::class, 'storeBookToUser']);
+
 
 // Auth routes
 Route::group([
@@ -39,7 +41,7 @@ Route::group([
 });
 
 Route::any('{any}', function(){
-    return response()->jsnon([
+    return response()->json([
         'status' => 'error',
         'message' => "Recourse not found"], 404);
 })->where('any', '.*');

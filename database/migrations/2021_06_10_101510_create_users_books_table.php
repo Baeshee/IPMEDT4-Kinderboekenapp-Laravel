@@ -15,10 +15,11 @@ class CreateUsersBooksTable extends Migration
     {
         Schema::create('users_books', function (Blueprint $table) {
             $table->id();
-            $table->string('user_email');
+            $table->string('user_email')->nullable();
             $table->foreign('user_email')->references('email')->on('users');
-            $table->bigInteger('book_isbn');
+            $table->bigInteger('book_isbn')->nullable();
             $table->foreign('book_isbn')->references('ISBN')->on('books');
+            $table->timestamps();
         });
     }
 

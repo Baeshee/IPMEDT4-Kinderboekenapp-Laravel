@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
+use Auth;
 
 class ApiController extends Controller
 {
@@ -58,4 +59,47 @@ class ApiController extends Controller
           ], 404);
         }
   }
+
+  public function storeBookToUser($bookId, Users_Book $usersBooks){
+    $user = Auth::user();
+    // dd($user->email);
+    if(Book::where('id', $bookId)->exists()){
+      $book = Book::where('id', $bookId)->first();
+      $usersBooks->user_email = $user->email;
+      // dd($usersBooks);
+      // dd($book);
+      $usersBooks->book_isbn = $book->ISBN;
+      // dd($usersBooks);
+      try{
+        $usersBooks->save();
+        return response()->json([
+          "message" => "Book saved"
+        ], 200);
+      }catch(Exception $e){
+        return response()->json([
+          "message" => "Saving went wrong"
+        ], 408);
+      }
+    }else {
+      return response()->json([
+        "message" => "Book not found"
+      ], 404);
+    }
+  }
+
+  // public function storeBookToUser(Request $request, Users_Book $usersBooks, $bookId) {
+  //   dd($request);
+  //   $usersBooks->user_email = $email = $request->user()['email'];
+  //   $usersBooks->book_isbn = $ISBN = $request->book()['ISBN'];
+  //   try{
+  //       $usersBooks->save();
+  //       return response()->json([
+  //         "message" => "Book saved"
+  //       ], 200);
+  //     }catch(Exception $e){
+  //       return response()->json([
+  //         "message" => "Saving went wrong"
+  //       ], 408);
+  //     }
+  // }
 }
