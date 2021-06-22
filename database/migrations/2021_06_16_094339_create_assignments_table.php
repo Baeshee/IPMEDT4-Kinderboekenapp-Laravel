@@ -25,9 +25,15 @@ class CreateAssignmentsTable extends Migration
             $table->string('assignmentChild3')->nullable();
             $table->string('kind_of_assignment');
             $table->string('status');
+            $table->string('chapters');
             $table->string('answer_1')->nullable();
             $table->string('answer_2')->nullable();
             $table->string('answer_3')->nullable();
+            $table->string('answer_4')->nullable();
+            $table->string('correct_answer_1')->nullable();
+            $table->string('correct_answer_2')->nullable();
+            $table->string('correct_answer_3')->nullable();
+            $table->string('correct_answer_4')->nullable();
         });
     }
 

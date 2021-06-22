@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AssignmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ use App\Http\Controllers\AuthController;
 // API routes
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('books/{book_title}', [ApiController::class, 'getBook']);
+Route::get('assignments', [ApiController::class, 'getAllAssignments']);
+Route::get('users/{id}', [ApiController::class, 'getUser']);
+Route::get('books/{id}', [ApiController::class, 'getBook']);
+Route::get('users/{id}/books', [ApiController::class, 'getUsersBooks']);
+Route::patch('assignments/{id}', [ApiController::class, 'updateAnswer']);
+
 
 // User routes
 Route::group([
