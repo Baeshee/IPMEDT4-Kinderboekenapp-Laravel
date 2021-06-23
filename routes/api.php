@@ -24,6 +24,7 @@ Route::get('assignments', [ApiController::class, 'getAllAssignments']);
 // Route::patch('assignments/{id}', [ApiController::class, 'updateAnswer']);
 
 
+
 // User routes
 Route::group([
     'middleware' => 'api',
@@ -34,7 +35,7 @@ Route::group([
         Route::get('profile/mascotteimg', [ApiController::class, 'getMascotteImg']);
         Route::patch('update', [ApiController::class, 'updateMascotteImg']);
         Route::post('booktouser', [ApiController::class, 'storeBookToUser']);
-        Route::get('assignments', [ApiController::class, 'getAssignments']);
+        Route::get('opdrachten/{isbn}', [ApiController::class, 'getAssignments']);
 });
 
 // Auth routes

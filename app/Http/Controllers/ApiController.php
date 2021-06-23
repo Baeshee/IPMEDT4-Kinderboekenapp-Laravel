@@ -46,12 +46,11 @@ class ApiController extends Controller
       return response($assignments, 200);
   }
 
-  public function getAssignments(){
-    $isbn = request('book_isbn');
+  public function getAssignments($isbn){
     $email = auth()->user()->email;
 
     if (Assignment::where('book_isbn', $isbn)->exists()) {
-      $assignments = Assignment::all()->toJson(JSON_PRETTY_PRINT);
+      $assignments = Assignment::all()->where('user_email', $email)->toJson(JSON_PRETTY_PRINT);
         return response($assignments, 200);
       } else {
         return response()->json([
