@@ -32,7 +32,7 @@ class CreateAssignmentTemplateTable extends Migration
     public function down()
     {
         Schema::table('assignment_template', function (Blueprint $table) {
-            $table->dropForeign('assignments_book_isbn_foreign');
+            $table->dropForeign('assignment_template_book_isbn_foreign');
         });
         Schema::dropIfExists('assignment_template');
     }

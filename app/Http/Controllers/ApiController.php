@@ -52,7 +52,7 @@ class ApiController extends Controller
     $email = auth()->user()->email;
 
     if (Assignment::where('book_isbn', $isbn)->exists()) {
-      $assignments = Assignment::all()->where('user_email', $email)->toJson(JSON_PRETTY_PRINT);
+      $assignments = Assignment::all()->where('user_email', $email)->where('book_isbn', $isbn)->toJson(JSON_PRETTY_PRINT);
         return response($assignments, 200);
       } else {
         return response()->json([
@@ -159,7 +159,6 @@ class ApiController extends Controller
           "created_at" => Carbon::now(),
         );
         
-        // dd($assignment);
         $assignment_array[] = $assignment;
       }
 
