@@ -35,7 +35,7 @@ class BooksTableSeeder extends Seeder
         ]);
 
         DB::table('books')->insert([
-            "book_title" => "Fantasia I, Fantasia",
+            "book_title" => "Fantasia I",
             "author" => "Geronimo Stilton",
             "genre" =>  "Spanning en Avontuur",
             "age" => "vanaf 8 jaar",
@@ -45,7 +45,7 @@ class BooksTableSeeder extends Seeder
         ]);
 
         DB::table('books')->insert([
-            "book_title" => "Fantasia II, De Speurtocht naar het Geluk",
+            "book_title" => "Fantasia II",
             "author" => "Geronimo Stilton",
             "genre" =>  "Spanning en Avontuur",
             "age" => "vanaf 8 jaar",
@@ -65,7 +65,7 @@ class BooksTableSeeder extends Seeder
         ]);
 
         DB::table('books')->insert([
-            "book_title" => "Fantasia IV, Het Drakenei",
+            "book_title" => "Fantasia IV",
             "author" => "Geronimo Stilton",
             "genre" =>  "Spanning en Avontuur",
             "age" => "vanaf 8 jaar",
@@ -85,7 +85,7 @@ class BooksTableSeeder extends Seeder
         ]);
 
         DB::table('books')->insert([
-            "book_title" => "Dolfje Weerwolfje 19 - Dolfje en Noura",
+            "book_title" => "Dolfje Weerwolfje - Dolfje en Noura",
             "author" => "Paul van Loon",
             "genre" =>  "Avontuur en Griezelen",
             "age" => "vanaf 6 jaar",

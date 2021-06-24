@@ -20,7 +20,7 @@ use App\Http\Controllers\AssignmentsController;
 // API routes
 Route::get('books', [ApiController::class, 'getAllBooks']);
 Route::get('books/{book_title}', [ApiController::class, 'getBook']);
-Route::get('assignments', [ApiController::class, 'getAllAssignments']);
+// Route::get('assignments', [ApiController::class, 'getAllAssignments']);
 // Route::patch('assignments/{id}', [ApiController::class, 'updateAnswer']);
 
 

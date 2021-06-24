@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Book;
 use App\Models\Users_Book;
 use App\Models\Assignment;
+use App\Models\AssignmentTemplate;
+use Carbon\Carbon;
 use DB;
 use Auth;
 
@@ -128,14 +130,47 @@ class ApiController extends Controller
         }
   }
 
-  public function storeBookToUser(Users_Book $usersBooks){
+  public function storeBookToUser(Users_Book $usersBooks, Assignment $assignment){
     $bookId = request('id');
     $email = auth()->user()->email;
     if(Book::where('id', $bookId)->exists()){
       $book = Book::where('id', $bookId)->first();
+
+      $book_isbn = $book->ISBN;
+
+      $templates = Book::where('id', $bookId)->first()->getAssignmentsTemplates;
+      // dd($assignment_template);
+
+      $assignment_array = array();
+
+      foreach($templates as $template){
+        $assignment = array(
+          'user_email' => $email,
+          "book_isbn" => $book_isbn,
+          "assignment" => $template->assignment,
+          "kind_of_assignment" => $template->kind_of_assignment,
+          "chapters" => $template->chapters,
+          "status" => 'active',
+          "answer_1" => '',
+          "answer_2" => '',
+          "answer_3" => '',
+          "answer_4" => '',
+          "updated_at" => Carbon::now(),
+          "created_at" => Carbon::now(),
+        );
+        
+        // dd($assignment);
+        $assignment_array[] = $assignment;
+      }
+
       $usersBooks->user_email = $email;
       $usersBooks->book_isbn = $book->ISBN;
       try{
+
+        foreach ($assignment_array as $assignment){
+          DB::table('assignments')->insert($assignment);
+        }
+
         $usersBooks->save();
         return response()->json([
           "message" => "Book saved"

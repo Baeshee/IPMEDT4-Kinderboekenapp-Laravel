@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             BooksTableSeeder::class,
             UsersTableSeeder::class,
             AssignmentsTableSeeder::class,
+            AssignmentTemplateSeeder::class,
         ]);
     }
 }
